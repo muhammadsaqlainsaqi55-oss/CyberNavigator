@@ -50,7 +50,7 @@ if prompt := st.chat_input("Ask about cyber careers, tools, or roadmaps..."):
         
         try:
             response = model.generate_content(full_prompt, stream=True, generation_config={'max_output_tokens': 150})
-            assistant_response = st.write_stream(chunk.text for chunk in response)
+            assistant_response = st.write_stream(response)
             response_placeholder.markdown(assistant_response)
             st.session_state.messages.append({"role": "assistant", "content": assistant_response})
         except Exception as e:
