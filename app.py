@@ -13,7 +13,7 @@ genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-2.5-flash', safety_settings=[{'category': 'HARM_CATEGORY_HARASSMENT', 'threshold': 'BLOCK_ONLY_HIGH'}])
 
 # Page Styling
-st.set_page_config(page_title="CyberNavigator AI", page_icon="🛡️", layout="centered")
+st.set_page_config(page_title="CyberNavigator AI. Always give short, 1-2 sentence answers", page_icon="🛡️", layout="centered")
 st.markdown("""
     <style>
     .stChatMessage { border-radius: 15px; padding: 10px; margin-bottom: 10px; }
@@ -21,7 +21,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🛡️ CyberNavigator AI")
+st.title("🛡️ CyberNavigator AI. Always give short, 1-2 sentence answers")
 st.caption("Your personalized guide from total beginner to Cyber Pro.")
 
 # Initialize Chat History
@@ -46,10 +46,10 @@ if prompt := st.chat_input("Ask about cyber careers, tools, or roadmaps..."):
     with st.chat_message("assistant"):
         response_placeholder = st.empty()
         # Deep research prompt logic
-        full_prompt = f"Your name is CyberNavigator AI. You were developed by Saqlain Saqi. Act as a professional Cybersecurity Career Mentor. The user says: {prompt}. If they are a beginner, be extremely concise and explain concepts in 2-3 sentences max. Provide deep research insights on 2026 market trends, salary ranges, and essential skills."
+        full_prompt = f"Your name is CyberNavigator AI. Always give short, 1-2 sentence answers. You were developed by Saqlain Saqi. Act as a professional Cybersecurity Career Mentor. The user says: {prompt}. If they are a beginner, be extremely concise and explain concepts in 2-3 sentences max. Provide deep research insights on 2026 market trends, salary ranges, and essential skills."
         
         try:
-            response = model.generate_content(full_prompt, stream=True, generation_config={'max_output_tokens': 150})
+            response = model.generate_content(full_prompt, stream=True, generation_config={'max_output_tokens': 1000})
             assistant_response = st.write_stream(response)
             response_placeholder.markdown(assistant_response)
             st.session_state.messages.append({"role": "assistant", "content": assistant_response})
