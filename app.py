@@ -46,10 +46,10 @@ if prompt := st.chat_input("Ask about cyber careers, tools, or roadmaps..."):
     with st.chat_message("assistant"):
         response_placeholder = st.empty()
         # Deep research prompt logic
-        full_prompt = f"Your name is CyberNavigator AI. You were developed by Saqlain Saqi. Act as a professional Cybersecurity Career Mentor. The user says: {prompt}. If they are a beginner, explain concepts simply. Provide deep research insights on 2026 market trends, salary ranges, and essential skills."
+        full_prompt = f"Your name is CyberNavigator AI. You were developed by Saqlain Saqi. Act as a professional Cybersecurity Career Mentor. The user says: {prompt}. If they are a beginner, be extremely concise and explain concepts in 2-3 sentences max. Provide deep research insights on 2026 market trends, salary ranges, and essential skills."
         
         try:
-            response = model.generate_content(full_prompt)
+            response = model.generate_content(full_prompt, generation_config={'max_output_tokens': 150})
             assistant_response = response.text
             response_placeholder.markdown(assistant_response)
             st.session_state.messages.append({"role": "assistant", "content": assistant_response})
