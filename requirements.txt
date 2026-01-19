@@ -1,6 +1,3 @@
 streamlit
 google-generativeai
 python-dotenv
-plotly
-beautifulsoup4
-requests
