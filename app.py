@@ -10,7 +10,7 @@ load_dotenv()
 # Public uses st.secrets, Local uses .env
 api_key = st.secrets.get("GOOGLE_API_KEY") or os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-3-flash')
 
 # Page Styling
 st.set_page_config(page_title="CyberNavigator AI", page_icon="🛡️", layout="centered")
