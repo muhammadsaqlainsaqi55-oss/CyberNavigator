@@ -49,8 +49,8 @@ if prompt := st.chat_input("Ask about cyber careers, tools, or roadmaps..."):
         full_prompt = f"Your name is CyberNavigator AI. You were developed by Saqlain Saqi. Act as a professional Cybersecurity Career Mentor. The user says: {prompt}. If they are a beginner, be extremely concise and explain concepts in 2-3 sentences max. Provide deep research insights on 2026 market trends, salary ranges, and essential skills."
         
         try:
-            response = model.generate_content(full_prompt, generation_config={'max_output_tokens': 150})
-            assistant_response = response.text
+            response = model.generate_content(full_prompt, stream=True, generation_config={'max_output_tokens': 150})
+            assistant_response = st.write_stream(chunk.text for chunk in response)
             response_placeholder.markdown(assistant_response)
             st.session_state.messages.append({"role": "assistant", "content": assistant_response})
         except Exception as e:
