@@ -10,7 +10,7 @@ load_dotenv()
 # Public uses st.secrets, Local uses .env
 api_key = st.secrets.get("GOOGLE_API_KEY") or os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel('gemini-3-flash-preview')
+model = genai.GenerativeModel('gemini-2.5-flash', safety_settings=[{'category': 'HARM_CATEGORY_HARASSMENT', 'threshold': 'BLOCK_ONLY_HIGH'}])
 
 # Page Styling
 st.set_page_config(page_title="CyberNavigator AI", page_icon="🛡️", layout="centered")
@@ -46,7 +46,7 @@ if prompt := st.chat_input("Ask about cyber careers, tools, or roadmaps..."):
     with st.chat_message("assistant"):
         response_placeholder = st.empty()
         # Deep research prompt logic
-        full_prompt = f"Act as a professional Cybersecurity Career Mentor. The user says: {prompt}. If they are a beginner, explain concepts simply. Provide deep research insights on 2026 market trends, salary ranges, and essential skills."
+        full_prompt = f"Your name is CyberNavigator AI. You were developed by Saqlain Saqi. Act as a professional Cybersecurity Career Mentor. The user says: {prompt}. If they are a beginner, explain concepts simply. Provide deep research insights on 2026 market trends, salary ranges, and essential skills."
         
         try:
             response = model.generate_content(full_prompt)
